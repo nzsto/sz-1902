@@ -1,86 +1,14 @@
 <template>
     <div class="movie_body">
-        <div class="movie_item">
+        <div class="movie_item" v-for="(item,index) in movieComing">
             <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
+                <img :src="item.img | toImg('128.180')">
             </div>
             <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p><span>177</span>人想看</p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>2019-01-02</span>上映</p>
-            </div>
-            <div class="movie_item_btn ticket">预售</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p><span>177</span>人想看</p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>2019-01-02</span>上映</p>
-            </div>
-            <div class="movie_item_btn ticket">预售</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p><span>177</span>人想看</p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>2019-01-02</span>上映</p>
-            </div>
-            <div class="movie_item_btn ticket">预售</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p><span>177</span>人想看</p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>2019-01-02</span>上映</p>
-            </div>
-            <div class="movie_item_btn ticket">预售</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p><span>177</span>人想看</p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>2019-01-02</span>上映</p>
-            </div>
-            <div class="movie_item_btn ticket">预售</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p><span>177</span>人想看</p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>2019-01-02</span>上映</p>
-            </div>
-            <div class="movie_item_btn ticket">预售</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p><span>177</span>人想看</p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>2019-01-02</span>上映</p>
+                <h2>{{item.nm}}</h2>
+                <p><span>{{item.wish}}</span>人想看</p>
+                <p>主演：<span>{{item.star}}</span></p>
+                <p><span>{{item.rt}}</span>上映</p>
             </div>
             <div class="movie_item_btn ticket">预售</div>
         </div>
@@ -88,8 +16,22 @@
 </template>
 
 <script>
+    import Vuex from "vuex";
     export default {
-        name: "MovieComing"
+        name: "MovieComing",
+        created(){
+            this.actionsMovieComing();
+        },
+        computed:{
+            ...Vuex.mapState({
+                movieComing:state=>state.movie.movieComing
+            })
+        },
+        methods:{
+            ...Vuex.mapActions({
+                actionsMovieComing:"movie/actionsMovieComing"
+            })
+        }
     }
 </script>
 

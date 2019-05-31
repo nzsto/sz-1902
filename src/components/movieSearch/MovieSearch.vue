@@ -1,29 +1,53 @@
 <template>
     <div class="search_movie_body">
-        <div class="search_movie_input">
-            <input type="text">
+        <div class="search_movie_input" >
+            <input type="text" v-model="searchVal">
         </div>
         <h2>电影/电视剧/综艺</h2>
-        <div class="movie_item">
+        <div class="movie_item" v-for="(item,index) in movieSearchList">
             <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
+                <img :src="item.img | toImg('128.180')">
             </div>
             <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p><span class="person">67554</span>人想看</p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>2019-05-20上映</span></p>
+                <h2>{{item.nm}}</h2>
+                <p><span class="person">{{item.wish}}</span>人想看</p>
+                <p>主演：<span>{{item.star}}</span></p>
+                <p><span>{{item.pubDesc}}</span></p>
             </div>
             <div class="movie_item_btn person">想看</div>
-        </div>
+         </div>
 
 
     </div>
 </template>
 
 <script>
+    import Vuex from "vuex";
     export default {
-        name: "MovieSearch"
+        name: "MovieSearch",
+        data(){
+            return {
+                searchVal:""
+            }
+        },
+        computed:{
+          ...Vuex.mapState({
+              movieSearchList:state=>state.movie.movieSearchList
+          })
+        },
+        watch:{
+            searchVal(newVal){
+                clearTimeout(this.timer);
+                this.timer = setTimeout(()=>{
+                    this.actionsMovieSearch(newVal);
+                },300)
+            }
+        },
+        methods:{
+            ...Vuex.mapActions({
+                actionsMovieSearch:"movie/actionsMovieSearch"
+            })
+        }
     }
 </script>
 

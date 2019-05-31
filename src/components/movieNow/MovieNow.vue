@@ -1,83 +1,37 @@
 <template>
     <div class="movie_body">
-        <div class="movie_item">
+        <div class="movie_item" v-for="(item,index) in movieNowList">
             <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
+                <img :src="item.img | toImg('128.180')">
             </div>
             <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p>观众评:<span class="grade">8.5</span></p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>今天56家影院放映443场</span></p>
+                <h2>{{item.nm}}</h2>
+                <p>观众评:<span class="grade">{{item.sc}}</span></p>
+                <p>主演：<span>{{item.star}}</span></p>
+                <p><span>{{item.showInfo}}</span></p>
             </div>
-            <div class="movie_item_btn asale">购票</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p>观众评:<span class="grade">8.5</span></p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>今天56家影院放映443场</span></p>
-            </div>
-            <div class="movie_item_btn asale">购票</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p>观众评:<span class="grade">8.5</span></p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>今天56家影院放映443场</span></p>
-            </div>
-            <div class="movie_item_btn asale">购票</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p>观众评:<span class="grade">8.5</span></p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>今天56家影院放映443场</span></p>
-            </div>
-            <div class="movie_item_btn asale">购票</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p>观众评:<span class="grade">8.5</span></p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>今天56家影院放映443场</span></p>
-            </div>
-            <div class="movie_item_btn asale">购票</div>
-        </div>
-        <div class="movie_item">
-            <div class="movie_item_pic">
-                <img src="/img/movie_1.jpg">
-            </div>
-            <div class="movie_item_info">
-                <h2>无名之辈</h2>
-                <p>观众评:<span class="grade">8.5</span></p>
-                <p>主演：<span>Alley 吴彦祖 胡歌</span></p>
-                <p><span>今天56家影院放映443场</span></p>
-            </div>
-            <div class="movie_item_btn asale">购票</div>
+            <div :class="item.globalReleased? 'movie_item_btn asale' : 'movie_item_btn ticket'">{{item.globalReleased?'购票':'预售'}}</div>
         </div>
     </div>
 </template>
 
 <script>
+    import Vuex from "vuex";
     export default {
-        name: "MovieNow"
+        name: "MovieNow",
+        created(){
+          this.actionsMoviePaying();
+        },
+        methods:{
+            ...Vuex.mapActions({
+                actionsMoviePaying:"movie/actionsMoviePaying"
+            })
+        },
+        computed:{
+            ...Vuex.mapState({
+                movieNowList:state=>state.movie.movieNowList
+            })
+        }
     }
 </script>
 

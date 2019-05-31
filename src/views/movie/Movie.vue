@@ -3,16 +3,16 @@
         <Header title="猫眼电影"></Header>
         <div id="content">
             <div class="movie_menu">
-                <div class="movie_menu_city">
+                <router-link class="movie_menu_city" tag="div" :to="{name:'city'}">
                     <span>北京</span>
                     <i class="iconfont">&#xe627;</i>
-                </div>
+                </router-link>
                 <ul class="movie_menu_switch">
-                    <li class="movie_menu_active">正在热映</li>
-                    <li>即将上映</li>
+                    <router-link :to="{name:'movieNow'}" tag="li">正在热映</router-link>
+                    <router-link :to="{name:'movieComing'}" tag="li">即将上映</router-link>
                 </ul>
                 <div class="movie_meun_search">
-                    <i class="iconfont">&#xe613;</i>
+                    <router-link class="iconfont" :to="{name:'movieSearch'}" tag="i">&#xe613;</router-link>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
         font-size: .3rem;
     }
 
-    #content .movie_menu .movie_menu_switch .movie_menu_active{
+    #content .movie_menu .movie_menu_switch .router-link-active{
         color: #ef4238;
         border-bottom:2px #ef4238 solid
     }

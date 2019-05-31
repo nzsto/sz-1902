@@ -14,4 +14,4 @@ export const movieDetails = ()=>http("get","/api/detailmovie",{movieId:345808});
 export const movieCinema = ()=>http("get","/api/cinemaList",{cityId:10});
 
 //搜索
-export const movieSearch = ()=>http("get","/api/searchList",{cityId:10,kw:"a"});
+export const movieSearch = (val)=>http("get","/api/searchList",{cityId:10,kw:val});
