@@ -3,6 +3,7 @@ import Router from "vue-router";
 import movie from "./movie"
 import cinema from "./cinema"
 import mine from "./mine"
+import city from "./city"
 Vue.use(Router)
 
 export default new Router({
@@ -10,10 +11,11 @@ export default new Router({
   routes: [
     {
       path:"/",
-      redirect:"/movie"
+      redirect:"/movie/movieNow"
     },
     movie,
     cinema,
-    mine
+    mine,
+    city
   ]
 })
