@@ -1,3 +1,4 @@
+const path = require("path");
 module.exports = {
     devServer:{
         proxy:{
@@ -14,7 +15,8 @@ module.exports = {
                 "@common" : path.resolve(__dirname,"./src/common"),
                 "@api" : path.resolve(__dirname,"./src/api"),
                 "@components" : path.resolve(__dirname,"./src/components"),
-                "@utils" : path.resolve(__dirname,"./src/utils")
+                "@utils" : path.resolve(__dirname,"./src/utils"),
+                "@views":path.resolve(__dirname,"./src/views")
             }
         }
     }
