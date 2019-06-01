@@ -4,7 +4,7 @@
         <div id="content">
             <div class="movie_menu">
                 <router-link class="movie_menu_city" tag="div" :to="{name:'city'}">
-                    <span>北京</span>
+                    <span>{{$store.state.city.nm}}</span>
                     <i class="iconfont">&#xe627;</i>
                 </router-link>
                 <ul class="movie_menu_switch">
@@ -16,7 +16,9 @@
                 </div>
             </div>
 
-            <router-view></router-view>
+           <keep-alive>
+               <router-view></router-view>
+           </keep-alive>
         </div>
     </div>
 </template>
@@ -38,6 +40,7 @@
         height: 100%;
         padding-top:1rem;
         padding-bottom: 1rem;
+        ;
     }
 
     #content .movie_menu{
@@ -49,6 +52,7 @@
         align-items: center;
         padding: 0 .4rem;
         border: 1px solid #e6e6e6;
+
     }
     #content .movie_menu .movie_menu_city span{
         font-size: .3rem;

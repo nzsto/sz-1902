@@ -19,20 +19,28 @@
                 </ul>
             </div>
         </div>
+        <CinemaList/>
     </div>
 </template>
 
 <script>
     import Header from "@common/header/Header"
+    import CinemaList from "@components/cinemaList/CinemaList"
     export default {
         name: "Cinema",
         components:{
-            Header
+            Header,
+            CinemaList
         }
     }
 </script>
 
 <style scoped>
+    .cinemaPage{
+        height: 100%;
+        position: relative;
+
+    }
     #cinema_content{
         position: absolute;
         width: 100%;

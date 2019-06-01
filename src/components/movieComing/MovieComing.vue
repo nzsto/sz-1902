@@ -1,30 +1,44 @@
 <template>
-    <div class="movie_body">
-        <div class="movie_item" v-for="(item,index) in movieComing">
-            <div class="movie_item_pic">
-                <img :src="item.img | toImg('128.180')">
+    <BScroll>
+        <div class="movie_body">
+            <Loading v-if="movieComingLoading"/>
+            <div class="movie_item" v-for="(item,index) in movieComing">
+                <div class="movie_item_pic">
+                    <img :src="item.img | toImg('128.180')">
+                </div>
+                <div class="movie_item_info">
+                    <h2>{{item.nm}}</h2>
+                    <p><span>{{item.wish}}</span>人想看</p>
+                    <p>主演：<span>{{item.star}}</span></p>
+                    <p><span>{{item.rt}}</span>上映</p>
+                </div>
+                <div class="movie_item_btn ticket">预售</div>
             </div>
-            <div class="movie_item_info">
-                <h2>{{item.nm}}</h2>
-                <p><span>{{item.wish}}</span>人想看</p>
-                <p>主演：<span>{{item.star}}</span></p>
-                <p><span>{{item.rt}}</span>上映</p>
-            </div>
-            <div class="movie_item_btn ticket">预售</div>
         </div>
-    </div>
+    </BScroll>
 </template>
 
 <script>
     import Vuex from "vuex";
     export default {
         name: "MovieComing",
-        created(){
-            this.actionsMovieComing();
+        data(){
+            return {
+                id:-1
+            }
+        },
+        activated(){
+            if(this.id !=this.cityId){
+                this.actionsMovieComing();
+                this.id = this.cityId;
+            }
+
         },
         computed:{
             ...Vuex.mapState({
-                movieComing:state=>state.movie.movieComing
+                movieComing:state=>state.movie.movieComing,
+                cityId:state=>state.city.cityId,
+                movieComingLoading:state=>state.movie.movieComingLoading
             })
         },
         methods:{
@@ -37,7 +51,6 @@
 
 <style scoped>
     #content .movie_body{
-        height: 100%;
         padding-bottom: 1rem;
         padding-left: .2rem;
         padding-right: .2rem;
@@ -48,6 +61,7 @@
         display: flex;
         align-items: center;
         border-bottom: 1px solid #ccc;
+        background: #fff;
     }
     #content .movie_body .movie_item .movie_item_pic{
         width: 1.28rem;

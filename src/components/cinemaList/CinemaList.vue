@@ -1,123 +1,67 @@
 <template>
-    <div class="cinema_body">
-        <div class="cinema_body_detail">
-            <div class="cinema_body_detail_name">
-                <span>大地影院(澳东世纪店)</span>
-                <span class="cinema_price">22.9元起</span>
-            </div>
-            <div class="cinema_body_detail_address">
-                <span>金州区大连经济技术开发区澳东世纪3层</span>
-                <span>1763.5km</span>
-            </div>
-            <div class="cinema_body_detail_card">
-                <div>小吃卡</div>
-                <div>折扣卡</div>
-            </div>
-        </div>
-        <div class="cinema_body_detail">
-            <div class="cinema_body_detail_name">
-                <span>大地影院(澳东世纪店)</span>
-                <span class="cinema_price">22.9元起</span>
-            </div>
-            <div class="cinema_body_detail_address">
-                <span>金州区大连经济技术开发区澳东世纪3层</span>
-                <span>1763.5km</span>
-            </div>
-            <div class="cinema_body_detail_card">
-                <div>小吃卡</div>
-                <div>折扣卡</div>
+    <BScroll>
+        <div class="cinema_body">
+            <Loading v-if="movieCinemaLoading"></Loading>
+            <div class="cinema_body_detail" v-for="(item,index) in movieCinemas">
+                <div class="cinema_body_detail_name">
+                    <span>{{item.nm}}</span>
+                    <span class="cinema_price">{{item.sellPrice}}元起</span>
+                </div>
+                <div class="cinema_body_detail_address">
+                    <span>{{item.addr}}</span>
+                    <span>{{item.distance}}</span>
+                </div>
+                <div class="cinema_body_detail_card">
+                    <div>小吃卡</div>
+                    <div>折扣卡</div>
+                </div>
             </div>
         </div>
-        <div class="cinema_body_detail">
-            <div class="cinema_body_detail_name">
-                <span>大地影院(澳东世纪店)</span>
-                <span class="cinema_price">22.9元起</span>
-            </div>
-            <div class="cinema_body_detail_address">
-                <span>金州区大连经济技术开发区澳东世纪3层</span>
-                <span>1763.5km</span>
-            </div>
-            <div class="cinema_body_detail_card">
-                <div>小吃卡</div>
-                <div>折扣卡</div>
-            </div>
-        </div>
-        <div class="cinema_body_detail">
-            <div class="cinema_body_detail_name">
-                <span>大地影院(澳东世纪店)</span>
-                <span class="cinema_price">22.9元起</span>
-            </div>
-            <div class="cinema_body_detail_address">
-                <span>金州区大连经济技术开发区澳东世纪3层</span>
-                <span>1763.5km</span>
-            </div>
-            <div class="cinema_body_detail_card">
-                <div>小吃卡</div>
-                <div>折扣卡</div>
-            </div>
-        </div>
-        <div class="cinema_body_detail">
-            <div class="cinema_body_detail_name">
-                <span>大地影院(澳东世纪店)</span>
-                <span class="cinema_price">22.9元起</span>
-            </div>
-            <div class="cinema_body_detail_address">
-                <span>金州区大连经济技术开发区澳东世纪3层</span>
-                <span>1763.5km</span>
-            </div>
-            <div class="cinema_body_detail_card">
-                <div>小吃卡</div>
-                <div>折扣卡</div>
-            </div>
-        </div>
-        <div class="cinema_body_detail">
-            <div class="cinema_body_detail_name">
-                <span>大地影院(澳东世纪店)</span>
-                <span class="cinema_price">22.9元起</span>
-            </div>
-            <div class="cinema_body_detail_address">
-                <span>金州区大连经济技术开发区澳东世纪3层</span>
-                <span>1763.5km</span>
-            </div>
-            <div class="cinema_body_detail_card">
-                <div>小吃卡</div>
-                <div>折扣卡</div>
-            </div>
-        </div>
-        <div class="cinema_body_detail">
-            <div class="cinema_body_detail_name">
-                <span>大地影院(澳东世纪店)</span>
-                <span class="cinema_price">22.9元起</span>
-            </div>
-            <div class="cinema_body_detail_address">
-                <span>金州区大连经济技术开发区澳东世纪3层</span>
-                <span>1763.5km</span>
-            </div>
-            <div class="cinema_body_detail_card">
-                <div>小吃卡</div>
-                <div>折扣卡</div>
-            </div>
-        </div>
-    </div>
+    </BScroll>
 </template>
 
 <script>
+    import Vuex from "vuex"
     export default {
-        name: "CinemaList"
+        name: "CinemaList",
+        data(){
+            return {
+                id:-1
+            }
+        },
+        activated(){
+            if(this.id !=this.cityId){
+                this.actionsMovieCinema(this.cityId);
+                this.id = this.cityId;
+            }
+
+        },
+        computed:{
+            ...Vuex.mapState({
+                cityId:state=>state.city.cityId,
+                movieCinemas:state=>state.movie.movieCinemas,
+                movieCinemaLoading:state=>state.movie.movieCinemaLoading
+            })
+        },
+        methods:{
+            ...Vuex.mapActions({
+                actionsMovieCinema:"movie/actionsMovieCinema"
+            })
+        }
     }
 </script>
 
 <style scoped>
+
     .cinema_body{
-        position: relative;
-        top:.92rem;
-        left:0;
+        position: absolute;
+        top:3.91rem;
         padding-left:.4rem;
         padding-right:.4rem;
         padding-bottom: 1rem;
     }
     .cinema_body .cinema_body_detail{
-        margin-top: .4rem;
+        /*margin-top: .4rem;*/
         border-bottom:1px solid #ccc;
         background: #fff;
 

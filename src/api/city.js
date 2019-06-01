@@ -4,5 +4,5 @@ import {http} from "@utils/http";
 //城市列表
 export const cityList = ()=>http("get","/api/cityList");
 
-//城市列表
+//城市定位
 export const cityGetLocation = ()=>http("get","/api/getLocation");

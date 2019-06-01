@@ -1,5 +1,6 @@
 <template>
     <div id="header">
+        <slot></slot>
         <h1>{{title}}</h1>
     </div>
 </template>
@@ -25,10 +26,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 5;
     }
     #header>h1{
         font-size: .32rem;
         font-style: normal;
         color: #fff;
+    }
+    #header>p{
+        position: absolute;
+        left: .2rem;
+        color:#fff;
+        font-size:.6rem
     }
 </style>
