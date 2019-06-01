@@ -1,5 +1,6 @@
 <template>
     <div class="moviePage">
+
         <Header title="猫眼电影"></Header>
         <div id="content">
             <div class="movie_menu">
@@ -25,10 +26,49 @@
 
 <script>
     import Header from "@common/header/Header"
+    import {messageBox} from "@common/MessageBox"
+    import Vuex from "vuex";
     export default {
         name: "Movie",
         components:{
-            Header
+            Header,
+        },
+
+
+
+
+
+
+
+        methods:{
+          ...Vuex.mapActions({
+              actioncityGetLocation:"city/actioncityGetLocation"
+          }),
+            ...Vuex.mapMutations({
+                MessageBoxConfirm:"city/MessageBoxConfirm"
+            })
+        },
+        computed:{
+          ...Vuex.mapState({
+              nm:state=>state.city.nm,
+              cityId:state=>state.city.cityId,
+              getLocation:state=>state.city.getLocation
+          })
+        },
+        created() {
+            this.actioncityGetLocation();
+            messageBox({
+                title:"城市选择",
+                content:this.getLocation.nm,
+                toggleCity:"切换城市",
+                confirm:"确认",
+                handleToggleCity: ()=>{
+                    this.$router.push("/city");
+                },
+                handleConfirm:()=>{
+                    this.MessageBoxConfirm();
+                }
+            })
         }
     }
 </script>

@@ -7,7 +7,7 @@
        </Header>
        <div id="content">
            <div class="detail_body">
-               <div class="detail_movie_bg" :style="{'background-image':'url('+moveDetail.img.replace(/w\.h/,'71.100')+')'}"></div>
+               <div class="detail_movie_bg" :style="{'background-image':'url('+(moveDetail.img?moveDetail.img.replace(/w\.h/,'71.100'):'')+')'}"></div>
                <div class="detail_movie_content">
                    <div class="detail_movie_content_bg">
                        <img :src="moveDetail.img|toImg('128.180')"/>

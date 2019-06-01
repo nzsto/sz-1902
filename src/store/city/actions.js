@@ -4,5 +4,12 @@ export  default  {
         let data = await cityList();
 
         commit("mutationsCityList",data.data.cities)
-    }
+    },
+    async actioncityGetLocation({commit}){
+        let data = await cityGetLocation();
+
+       console.log(data.data);
+       commit("mutationsCityGetLocation",data.data)
+    },
+
 }

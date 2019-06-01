@@ -18,8 +18,9 @@
                     </li>
                 </ul>
             </div>
+            <CinemaList/>
         </div>
-        <CinemaList/>
+
     </div>
 </template>
 
@@ -39,7 +40,7 @@
     .cinemaPage{
         height: 100%;
         position: relative;
-
+        overflow: hidden;
     }
     #cinema_content{
         position: absolute;

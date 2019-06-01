@@ -70,5 +70,16 @@ export  default  {
         state.nm = params.nm;
         window.sessionStorage.setItem("nm",params.nm);
         window.sessionStorage.setItem("cityId",params.cityId)
+    },
+    //城市定位
+    mutationsCityGetLocation(state,params){
+        state.getLocation = params;
+
+        window.sessionStorage.setItem("getLocation",JSON.stringify(params))
+
+    },
+    MessageBoxConfirm(state){
+        state.nm = state.getLocation.nm;
+        state.cityId = state.getLocation.id;
     }
 }

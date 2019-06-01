@@ -52,10 +52,8 @@
 </script>
 
 <style scoped>
-
     .cinema_body{
-        position: absolute;
-        top:3.91rem;
+        padding-top: 1rem;
         padding-left:.4rem;
         padding-right:.4rem;
         padding-bottom: 1rem;
